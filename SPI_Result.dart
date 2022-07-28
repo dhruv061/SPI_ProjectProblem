@@ -33,10 +33,10 @@ class SPI_Result extends StatefulWidget {
 
 class _SPI_ResultState extends State<SPI_Result> {
   //variable
-  double SPI = 0.0;
+  double SPI=0.0;
 
   //one method for all calculation
-  Widget FinalSPI() {
+  void FinalSPI() {
     //convert all list into String to int
     List<int> GetSubCreaditList = widget.SubCreaditList.map(int.parse).toList();
     List<int> GetMidIMarksList = widget.MID_I_MarksList.map(int.parse).toList();
@@ -154,13 +154,17 @@ class _SPI_ResultState extends State<SPI_Result> {
     //get Final result
     double getResult = (TotalEarnedPoint / TotalSubCreadit);
 
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          SPI = getResult;
-        });
-      },
-    );
+    SPI = getResult;
+    
+    if(mounted){
+      setState(() {});
+    }
+  }
+  
+   @override
+  void initState() {
+    super.initState();
+    FinalSPI();
   }
 
 //**************************************************************************** */
